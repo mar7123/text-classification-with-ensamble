@@ -16,13 +16,20 @@ def join_text_list(texts):
 
 def compute_tfidf_features(data, max_features):
     # Initialize TF-IDF vectorizer
-    tfidf_vectorizer = TfidfVectorizer(
-        max_features=max_features, smooth_idf=True, norm='l2', stop_words=None
+    model_name = "training\\tfidf_vectorizer.pkl"
+    model_path = os.path.join(os.getcwd(), model_name)
+    tfidf_vectorizer = joblib.load(model_path)
+
+    sorted_vocab = sorted(tfidf_vectorizer.vocabulary_.items(), key=lambda x: x[1])[:max_features]
+    truncated_vocab = {term: idx for idx, (term, _) in enumerate(sorted_vocab)}
+
+    tfidf_vectorizer_adjusted = TfidfVectorizer(
+        max_features=max_features,
+        vocabulary=truncated_vocab  # Use the same vocabulary
     )
     # Fit and transform the text data
-    tfidf_matrix = tfidf_vectorizer.fit_transform(data).toarray()
-    terms = tfidf_vectorizer.get_feature_names_out()
-
+    tfidf_matrix = tfidf_vectorizer_adjusted.fit_transform(data).toarray()
+    terms = tfidf_vectorizer_adjusted.get_feature_names_out()
     return tfidf_matrix, terms
 
 
@@ -37,9 +44,8 @@ def processing():
 
     df["text_join"] = df["text"].apply(join_text_list)
 
-    max_features = 1000
-
-    tfidf_mat, terms = compute_tfidf_features(df["text_join"], max_features)
+    k = 1000  # Number of features to select
+    tfidf_mat, terms = compute_tfidf_features(df["text_join"], k)
     print(tfidf_mat.shape)
 
     label_name = "training\\label.xlsx"
@@ -48,11 +54,9 @@ def processing():
     df_label = pd.read_excel(label_path, usecols=['label'])
 
     label_encoder = LabelEncoder()
-    y_encoded = label_encoder.fit_transform(df_label['label'])
+    label_encoder.fit_transform(df_label['label'])
     target_names = [name.replace(" ", "_") for name in label_encoder.classes_]
 
-
-    k = 500  # Number of features to select
     if tfidf_mat.shape[1] < k:
         padded_features = np.zeros((1, k))
         padded_features[:, :tfidf_mat.shape[1]] = tfidf_mat
@@ -66,22 +70,11 @@ def processing():
             pred = result[0]
             return target_names[pred]
 
-
-
-    def apply_chi2_feature_selection(X, y, k_inner=500):
-        chi2_selector = SelectKBest(chi2, k=k_inner)
-        X_kbest = chi2_selector.fit_transform(X, y)
-        mask = chi2_selector.get_support()
-        selected_features = [terms[i] for i in range(len(mask)) if mask[i]]
-        return X_kbest, selected_features
-
-    X_selected, selected_terms = apply_chi2_feature_selection(tfidf_mat, y_encoded, k_inner=k)
-
     model_name = "training\\stacking_classifier.pkl"
     model_path = os.path.join(os.getcwd(), model_name)
 
     with open(model_path, 'rb') as file:
         model = joblib.load(file)
-        result = model.predict(X_selected)
+        result = model.predict(tfidf_mat)
         pred = result[0]
         return target_names[pred]

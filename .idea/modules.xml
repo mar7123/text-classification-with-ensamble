@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/BBW.iml" filepath="$PROJECT_DIR$/.idea/BBW.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/text-classification-with-ensamble.iml" filepath="$PROJECT_DIR$/.idea/text-classification-with-ensamble.iml" />
     </modules>
   </component>
 </project>
