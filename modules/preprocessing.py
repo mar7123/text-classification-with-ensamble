@@ -29,7 +29,7 @@ def remove_whitespace_LT(text):
 
 
 def remove_whitespace_multiple(text):
-    return re.sub('\s+', ' ', text)
+    return re.sub(r'\s+', ' ', text)
 
 
 def remove_single_char(text):
