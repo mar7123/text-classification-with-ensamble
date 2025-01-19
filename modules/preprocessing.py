@@ -53,15 +53,15 @@ def preprocess(dataset_path):
     print('Dataset size:', df.shape)
     print('Columns are:', df.columns)
 
-    df['case_folding'] = df['response'].apply(case_folding)
-
     df.head()
 
-    df['cleaning'] = df['case_folding'].apply(remove_number)
+    df['cleaning'] = df['response'].apply(remove_number)
     df['cleaning'] = df['cleaning'].apply(remove_punctuation)
     df['cleaning'] = df['cleaning'].apply(remove_whitespace_LT)
     df['cleaning'] = df['cleaning'].apply(remove_whitespace_multiple)
     df['cleaning'] = df['cleaning'].apply(remove_single_char)
+
+    df['case_folding'] = df['cleaning'].apply(case_folding)
 
     df.head()
 
