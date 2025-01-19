@@ -56,7 +56,7 @@ Before you begin, ensure you have met the following requirements:
 1. Run the Flask application:
 
    ```bash
-   python app.py
+   flask --app app run
    ```
 
 2. Open your web browser and navigate to `http://localhost:5000`.
