@@ -94,14 +94,8 @@ nav ul li a {
 }
 
 .container-upload {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
     background-color: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    height: 90vh;
-    margin-top: 3rem;
+    padding: 3rem;
 }
 
 .upload-box {
@@ -110,8 +104,8 @@ nav ul li a {
     background-color: azure;
     padding: 40px;
     text-align: center;
-    width: 40%;
-    margin-left: 30%;
+    max-width: 50%;
+    align-self: center;
 }
 
 .upload-box .icon {
@@ -132,7 +126,6 @@ nav ul li a {
 }
 
 .description {
-    justify-content: space-between;
     max-width: 100%;
     padding: 1rem;
 }

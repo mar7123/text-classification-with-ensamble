@@ -29,23 +29,25 @@
 
     <!-- Upload file -->
     <div class="container-upload">
-      <div class="upload-box" onclick="upload()">
-        <div id="container-upload-id" class="icon">+</div>
-        <p>
-          <a href="#">Browse to upload</a>
-        </p>
-        <p>
-          Supports all audio .flac, .mp3, .mp4, .mpeg, .mpga, .m4a, .ogg, .wav,
-          dan .webm
-        </p>
-      </div>
-
-      <div class="description">
-        <h1>Convert and classify audio and video files with just one click.</h1>
-        <p>
-          Upload your files now and start transcription and deep classification
-          seconds
-        </p>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin: 2rem 0; justify-items: center;">
+        <div class="upload-box" onclick="upload()">
+          <div id="container-upload-id" class="icon">+</div>
+          <p>
+            <a href="#">Browse to upload</a>
+          </p>
+          <p>
+            Supports all audio .flac, .mp3, .mp4, .mpeg, .mpga, .m4a, .ogg, .wav,
+            dan .webm
+          </p>
+        </div>
+  
+        <div class="description">
+          <h1>Convert and classify audio and video files with just one click.</h1>
+          <p>
+            Upload your files now and start transcription and deep classification
+            seconds
+          </p>
+        </div>
       </div>
 
       <div class="container-audio">
@@ -57,7 +59,6 @@
           </audio>
         </div>
       </div>
-
     </div>
     <!-- End of upload file -->
 
