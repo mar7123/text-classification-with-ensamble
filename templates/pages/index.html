@@ -29,23 +29,33 @@
 
     <!-- Upload file -->
     <div class="container-upload">
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin: 2rem 0; justify-items: center;">
+      <div
+        style="
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 3rem;
+          margin: 2rem 0;
+          justify-items: center;
+        "
+      >
         <div class="upload-box" onclick="upload()">
           <div id="container-upload-id" class="icon">+</div>
           <p>
             <a href="#">Browse to upload</a>
           </p>
           <p>
-            Supports all audio .flac, .mp3, .mp4, .mpeg, .mpga, .m4a, .ogg, .wav,
-            dan .webm
+            Supports all audio .flac, .mp3, .mp4, .mpeg, .mpga, .m4a, .ogg,
+            .wav, dan .webm
           </p>
         </div>
-  
+
         <div class="description">
-          <h1>Convert and classify audio and video files with just one click.</h1>
+          <h1>
+            Convert and classify audio and video files with just one click.
+          </h1>
           <p>
-            Upload your files now and start transcription and deep classification
-            seconds
+            Upload your files now and start transcription and deep
+            classification seconds
           </p>
         </div>
       </div>
@@ -53,10 +63,7 @@
       <div class="container-audio">
         <div class="audio-play">
           <p>Play Audio</p>
-          <audio controls autoplay muted>
-            <source src="" type="audio/ogg">
-            <source src="" type="audio/mpeg">
-          </audio>
+          <audio id="audio-box-id" src="" controls="true"></audio>
         </div>
       </div>
     </div>
@@ -224,7 +231,10 @@
           if (!response.ok) {
             throw new Error(`Response status: ${response.status}`);
           }
-
+          var audio_box = document.getElementById("audio-box-id");
+          audio_box.src = window.location.href + "static/" + file.name;
+          audio_box.controls = true;
+          
           const json = await response.json();
           loader.className = "";
 
@@ -263,7 +273,8 @@
             confirmButtonText: "Ok",
           });
         } catch (error) {
-                  loader.className = "";}
+          loader.className = "";
+        }
       };
       input.click();
     }

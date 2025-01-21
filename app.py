@@ -22,7 +22,7 @@ def upload_audio():
             return jsonify({'error': 'No audio file provided'}), 400
 
         audio_file = request.files['audio']
-        audioName = "temp\\audio.mp3"
+        audioName = f"static\\{audio_file.filename}"
         audio_path = os.path.join(os.getcwd(), audioName)
         audio_file.save(audio_path)
         transcription = transcribe_audio(audio_path)
