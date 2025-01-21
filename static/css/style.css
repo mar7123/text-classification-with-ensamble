@@ -82,16 +82,17 @@ nav ul li a {
     border-radius: 50%;
     background: #000000;
     --_m: 
-      conic-gradient(#0000 10%,#000),
-      linear-gradient(#000 0 0) content-box;
+    conic-gradient(#0000 10%,#000),
+    linear-gradient(#000 0 0) content-box;
     -webkit-mask: var(--_m);
             mask: var(--_m);
     -webkit-mask-composite: source-out;
             mask-composite: subtract;
     animation: l3 1s infinite linear;
-  }
-  @keyframes l3 {to{transform: rotate(1turn)}}
-  
+}
+@keyframes l3 {to{transform: rotate(1turn)}
+}
+
 .container-upload {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -100,6 +101,7 @@ nav ul li a {
     border-radius: 12px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     height: 90vh;
+    margin-top: 3rem;
 }
 
 .upload-box {
@@ -150,6 +152,20 @@ nav ul li a {
 .description a {
     color: #6a67ce;
     text-decoration: none;
+}
+
+/* Audio */
+.container-audio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.audio-play p {
+    display: flex;
+    justify-content: center;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
 }
 
 /* Result */
